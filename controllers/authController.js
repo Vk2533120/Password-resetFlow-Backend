@@ -26,7 +26,7 @@ exports.forgotPassword = async (req, res) => {
     const token = crypto.randomBytes(32).toString('hex');
     resetTokens[token] = email;
 
-    const link = `http://localhost:5174/reset-password/${token}`;
+    const link = `${process.env.FRONTEND_URL}/reset-password/${token}`;
     await sendEmail(email, 'Reset Password', `<a href="${link}">Click to reset</a>`);
 
     res.json({ message: 'Reset link sent' });
